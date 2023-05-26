@@ -10,7 +10,7 @@ entity FSM is
 	port (Start, TrainingIn, CollisionPipe, CollisionGround, Lifepack : in std_logic;
 		Mode : in std_logic_vector(2 downto 0); 
 		Difficulty : out std_logic_vector(1 downto 0);
-		Enable, TrainingOut : out std_logic);
+		Enable, Reset, TrainingOut : out std_logic);
 end entity FSM;
 
 architecture behaviour of FSM is
@@ -39,6 +39,7 @@ begin
 				-- Output signals for current state
 				TrainingOut <= TrainingIn;
 				Enable <= '0';
+				Reset <= '1';
 			when 2 => -- 3 hearts
 				-- Check state change conditions
 				if (CollisionGround = '1') then
@@ -49,6 +50,7 @@ begin
 				
 				-- Output signals for current state
 				Enable <= '1';
+				Reset <= '0';
 			when 3 => -- 2 hearts
 				-- Check state change conditions
 				if (CollisionGround = '1') then
@@ -61,6 +63,7 @@ begin
 				
 				-- Output signals for current state
 				Enable <= '1';
+				Reset <= '0';
 			when 4 => -- 1 heart
 				-- Check state change conditions
 				if (CollisionGround = '1') then
@@ -73,6 +76,7 @@ begin
 				
 				-- Output signals for current state
 				Enable <= '1';
+				Reset <= '0';
 			when 5 => -- "game over"
 				-- Check state change conditions
 				if (Start = '0') then
@@ -81,6 +85,7 @@ begin
 				
 				-- Output signals for current state
 				Enable <= '0';
+				Reset <= '0';
 		end case;
 		state := nextState; -- Update state
 		Difficulty <= difficulty_V; -- Update difficulty output signal
