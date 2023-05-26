@@ -36,9 +36,9 @@ Blue <=  not bird_on;
 Move_Bird: process (vert_sync, left_button, reset)
 begin
 	if (rising_edge(vert_sync)) then
-		if ( ('0' & ball_y_pos >= CONV_STD_LOGIC_VECTOR(479,10) - size) ) then
+		if ( ('0' & bird_y_pos >= CONV_STD_LOGIC_VECTOR(479,10) - size) ) then
 			bird_on <= '0';
-		elsif (ball_y_pos <= size) then
+		elsif (bird_y_pos <= size) then
 			bird_on <= '0';
 		elsif (left_button <= '1') then
 			bird_y_motion <= - CONV_STD_LOGIC_VECTOR(2,10);
