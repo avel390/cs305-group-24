@@ -41,7 +41,7 @@ begin
 		elsif (bird_y_pos <= size) then
 			bird_on <= '0';
 		elsif (left_button <= '1') then
-			bird_y_motion <= - CONV_STD_LOGIC_VECTOR(2,10);
+			bird_y_motion <= - CONV_STD_LOGIC_VECTOR(4,10);
 		else
 			bird_y_motion <= CONV_STD_LOGIC_VECTOR(2,10);
 		end if
